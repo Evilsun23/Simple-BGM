@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambient Hours</title>
+<meta name="description" content="A quiet room of ambient sound.">
+<meta name="theme-color" content="#0b0e14">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="glow" aria-hidden="true"></div>
+
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">now entering</p>
+    <h1 class="title">Ambient&nbsp;Hours</h1>
+    <p class="subtitle">Pick a room. Let it run in the background as long as you like.</p>
+  </header>
+
+  <section class="cards" aria-label="Sound rooms">
+
+    <button class="card" data-id="nightingale"
+      data-title="Nightingale"
+      data-subtitle="Birdsong in the reeds"
+      data-audio="audio-nightingale.mp3"
+      data-cover="cover-nightingale.jpg">
+      <img class="card-image" src="cover-nightingale.jpg" alt="A nightingale singing on a branch">
+      <span class="card-shade" aria-hidden="true"></span>
+      <span class="card-ring" aria-hidden="true"></span>
+      <span class="card-play" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="card-title">Nightingale</span>
+        <span class="card-subtitle">Birdsong in the reeds</span>
+      </span>
+    </button>
+
+    <button class="card" data-id="lofi"
+      data-title="Study Window"
+      data-subtitle="Lofi, low light, slow pages"
+      data-audio="audio-lofi.mp3"
+      data-cover="cover-lofi.jpg">
+      <img class="card-image" src="cover-lofi.jpg" alt="An illustrated girl studying by lamplight with a cat">
+      <span class="card-shade" aria-hidden="true"></span>
+      <span class="card-ring" aria-hidden="true"></span>
+      <span class="card-play" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="card-title">Study Window</span>
+        <span class="card-subtitle">Lofi, low light, slow pages</span>
+      </span>
+    </button>
+
+    <button class="card" data-id="rain"
+      data-title="Storm Line"
+      data-subtitle="Rain and distant thunder"
+      data-audio="audio-rain.mp3"
+      data-cover="cover-rain.jpg">
+      <img class="card-image" src="cover-rain.jpg" alt="Lightning over a stormy sky with falling rain">
+      <span class="card-shade" aria-hidden="true"></span>
+      <span class="card-ring" aria-hidden="true"></span>
+      <span class="card-play" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </span>
+      <span class="card-text">
+        <span class="card-title">Storm Line</span>
+        <span class="card-subtitle">Rain and distant thunder</span>
+      </span>
+    </button>
+
+  </section>
+
+  <p class="hint">Closing the tab stops the sound — minimizing or switching apps doesn't.</p>
+</main>
+
+<footer class="player" id="player" aria-label="Now playing">
+  <div class="player-inner">
+
+    <div class="player-track">
+      <img class="player-art" id="playerArt" src="" alt="" aria-hidden="true">
+      <div class="player-meta">
+        <span class="player-title" id="playerTitle">Nothing playing</span>
+        <span class="player-subtitle" id="playerSubtitle">Choose a room above</span>
+      </div>
+    </div>
+
+    <div class="player-controls">
+      <button class="transport-btn" id="playPauseBtn" disabled aria-label="Play">
+        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      </button>
+      <button class="transport-btn transport-btn--ghost" id="stopBtn" disabled aria-label="Stop">
+        <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+      </button>
+      <div class="progress-wrap">
+        <span class="progress-time" id="progressCurrent">0:00</span>
+        <input type="range" class="progress-bar" id="progressBar" min="0" max="100" value="0" step="0.1" disabled aria-label="Seek">
+        <span class="progress-time" id="progressTotal">0:00</span>
+      </div>
+    </div>
+
+    <div class="player-volume">
+      <svg class="volume-icon" id="volumeIcon" viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5L7 10H3z"/></svg>
+      <input type="range" class="volume-bar" id="volumeBar" min="0" max="100" value="70" aria-label="Volume">
+    </div>
+
+  </div>
+</footer>
+
+<audio id="audioEl" preload="none"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
